@@ -20,9 +20,20 @@
         ul { padding-left: 1.2rem; }
         a { color: #0E7C86; }
         code { background: #f2f4f5; padding: 1px 4px; border-radius: 4px; }
+            .langbar { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 12px; }
+        .langbar button { font: inherit; font-size: 0.85rem; padding: 5px 12px; border: 1px solid #cbd5e1;
+                          background: #fff; color: #475569; border-radius: 999px; cursor: pointer; }
+        .langbar button[aria-current="true"] { background: #2563eb; border-color: #2563eb; color: #fff; }
+        [data-lang][hidden] { display: none; }
     </style>
 </head>
 <body>
+<div class="langbar">
+  <button type="button" data-set-lang="ko">한국어</button>
+  <button type="button" data-set-lang="en">English</button>
+</div>
+<div data-lang="ko">
+
     <h1>개인정보처리방침</h1>
     <p class="updated">앱 이름: 스마트 문서 스캐너 (Smart Scan AI) — 문서·영수증 스캐너 + OCR 문자 인식<br />
     시행일: 2026-06-20 · 최종 업데이트: 2026-06-20</p>
@@ -124,5 +135,134 @@
     <p>
         개인정보 관련 문의: <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a>
     </p>
+</div>
+
+<div data-lang="en">
+    <h1>Privacy Policy</h1>
+    <p class="updated">App: Smart Scan AI — document &amp; receipt scanner with OCR text recognition<br />
+    Effective: 2026-06-20 · Last updated: 2026-06-20</p>
+
+    <p>
+        Smart Scan AI (the "App") values your privacy and complies with applicable law. This
+        privacy policy explains what information the App handles and how.
+        <strong>Apart from the advertising identifier, the App collects and transmits no
+        personal information, and the documents you scan and the text it recognizes are stored
+        only inside your device.</strong>
+    </p>
+
+    <h2>1. Information collected and processed</h2>
+    <ul>
+        <li>
+            <strong>Camera images and scans</strong>: the camera is used solely to scan
+            documents and receipts. Captured page images are
+            <strong>stored only in app-internal storage on your device</strong> and are never
+            collected or transmitted externally.
+        </li>
+        <li>
+            <strong>Recognized text (OCR results)</strong>: text extracted from a scanned image
+            is <strong>stored only in a database (Room) inside your device</strong> and is never
+            collected or transmitted externally.
+        </li>
+        <li>
+            <strong>Advertising ID</strong>: to serve ads, Google AdMob may collect and use
+            standard advertising data such as the advertising identifier. This is the only
+            identifying data the App collects or shares.
+        </li>
+    </ul>
+    <p>
+        The App has no login, so it never collects information that directly identifies you,
+        such as your name, email or phone number.
+    </p>
+
+    <h2>2. Where data is stored — on your device only</h2>
+    <p>
+        Every scanned image and every piece of recognized text the App produces is
+        <strong>stored only inside your device</strong>. It is <strong>never transmitted</strong>
+        to a server run by the developer or to any external cloud. Only when you yourself export
+        to PDF/TXT or use the share feature is a file saved or sent — and then only to the
+        location or app (mail, messenger, storage, etc.) you pick through the system file picker
+        (SAF) or share sheet. That process happens entirely under your control.
+    </p>
+
+    <h2>3. On-device (offline) text recognition</h2>
+    <p>
+        Text recognition (OCR) runs <strong>on the device</strong> using Google ML Kit's Korean
+        and Latin script recognition models. Recognition works offline, and scanned images are
+        never uploaded to an external server for recognition.
+    </p>
+
+    <h2>4. Login, accounts and developer servers</h2>
+    <p>
+        The App <strong>requires no login or sign-up</strong> and collects no information that
+        identifies you, such as your name, email or phone number. The developer also
+        <strong>operates no server</strong> that stores or processes user data.
+    </p>
+
+    <h2>5. Advertising (Google AdMob)</h2>
+    <p>
+        To stay free, the App displays Google AdMob ads (banner and interstitial). AdMob may
+        collect and use data such as the advertising identifier in order to serve personalized
+        ads. For details see Google's
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy
+        Policy</a> and
+        <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">
+        AdMob data policy</a>.
+    </p>
+
+    <h2>6. Permissions</h2>
+    <ul>
+        <li><strong>Camera</strong>: used only to scan (photograph) documents and receipts.</li>
+        <li><strong>Internet / network state</strong>: used only to display ads.</li>
+    </ul>
+
+    <h2>7. Deleting data</h2>
+    <p>
+        Deleting a saved document inside the App removes its text and page images from the
+        device. Uninstalling the App deletes all of the data it stored.
+    </p>
+
+    <h2>8. Children's privacy</h2>
+    <p>
+        The App is not directed at children under 13 and does not knowingly collect personal
+        information from children.
+    </p>
+
+    <h2>9. Changes to this policy</h2>
+    <p>
+        This policy may be amended as law or the service changes, and any change will be
+        announced on this page.
+    </p>
+
+    <h2>10. Contact</h2>
+    <p>
+        Privacy inquiries: <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a>
+    </p>
+</div>
+
+<script>
+(function () {
+  var qs = new URLSearchParams(location.search).get('lang');
+  var saved = null;
+  try { saved = localStorage.getItem('policy-lang'); } catch (e) {}
+  var nav = (navigator.language || 'en').toLowerCase();
+  var initial = qs || saved || (nav.indexOf('ko') === 0 ? 'ko' : 'en');
+  function apply(l) {
+    var lang = (l === 'ko') ? 'ko' : 'en';
+    document.documentElement.lang = lang;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (el) {
+      el.hidden = el.getAttribute('data-lang') !== lang;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-set-lang]'), function (b) {
+      b.setAttribute('aria-current', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('policy-lang', lang); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest('[data-set-lang]') : null;
+    if (b) { e.preventDefault(); apply(b.getAttribute('data-set-lang')); }
+  });
+  apply(initial);
+})();
+</script>
 </body>
 </html>

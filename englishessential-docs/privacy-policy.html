@@ -8,9 +8,20 @@
 body{font-family:-apple-system,'Apple SD Gothic Neo',Roboto,sans-serif;max-width:760px;margin:0 auto;padding:24px;color:#222;line-height:1.7}
 h1{font-size:1.6em}h2{font-size:1.2em;margin-top:1.6em;color:#1452A8}
 .muted{color:#666;font-size:.9em}a{color:#1452A8}
-</style>
+        .langbar { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 12px; }
+        .langbar button { font: inherit; font-size: 0.85rem; padding: 5px 12px; border: 1px solid #cbd5e1;
+                          background: #fff; color: #475569; border-radius: 999px; cursor: pointer; }
+        .langbar button[aria-current="true"] { background: #2563eb; border-color: #2563eb; color: #fff; }
+        [data-lang][hidden] { display: none; }
+    </style>
 </head>
 <body>
+<div class="langbar">
+  <button type="button" data-set-lang="ko">한국어</button>
+  <button type="button" data-set-lang="en">English</button>
+</div>
+<div data-lang="ko">
+
 <h1>개인정보처리방침 — 에센영어 (English Essential)</h1>
 <p class="muted">최종 업데이트: 2026-06-20 · 문의: <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a></p>
 <p>에센영어(이하 "앱")는 이용자의 개인정보를 존중합니다. 본 앱은 <b>서버가 없으며(서버리스)</b>, 학습 기록은 전부 이용자의 기기 내부에만 저장됩니다.</p>
@@ -38,5 +49,62 @@ h1{font-size:1.6em}h2{font-size:1.2em;margin-top:1.6em;color:#1452A8}
 <p>모든 학습 데이터는 기기에만 저장되므로, 앱을 삭제하면 관련 데이터도 함께 삭제됩니다.</p>
 <h2>6. 문의</h2>
 <p>개인정보 관련 문의: <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a></p>
+</div>
+
+<div data-lang="en">
+<h1>Privacy Policy — English Essential</h1>
+<p class="muted">Last updated: 2026-06-20 · Contact: <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a></p>
+<p>English Essential (the "App") respects your privacy. The App is <b>serverless</b> — it has no backend of ours — and all learning records are stored only inside your device.</p>
+<h2>1. Information the App collects</h2>
+<ul>
+<li>The App itself does not collect personal information such as your name or email, and does not transmit any externally.</li>
+<li>All learning data (progress, words, pronunciation attempts, statistics, gems, etc.) is stored only in local device storage (sqflite) and is never transmitted externally.</li>
+</ul>
+<h2>2. Third-party services</h2>
+<ul>
+<li><b>Google AdMob (ads)</b>: the App uses Google AdMob to display ads. AdMob may collect the Advertising ID and device information and share it with a third party (Google) in order to serve and measure ads. Details follow Google's advertising policies and privacy policy.</li>
+<li><b>Content download</b>: when you search for or download books and audiobooks, network requests are made to public services such as Project Gutenberg (Gutendex), LibriVox and archive.org. No personal information is sent in the process.</li>
+<li><b>On-device AI</b>: speech recognition and pronunciation processing use the device's built-in capabilities (Android) and are handled on the device.</li>
+<li><b>Firebase Crashlytics (crash reporting)</b>: if the App crashes, the error stack trace, device model, OS version, app version and crash time are sent to Google to improve stability. No learning content or recordings are included.</li>
+<li><b>Firebase Analytics (usage analytics)</b>: anonymous usage statistics are collected to understand which features are used, and the Advertising ID may be used in that process. <b>For users in the EEA, the UK and Switzerland, collection stays disabled until consent (UMP) has been resolved</b>, and is enabled only once the consent requirements are met.</li>
+</ul>
+<h2>3. Permissions</h2>
+<ul>
+<li>Microphone (RECORD_AUDIO): used only for speech recognition in pronunciation practice and expression challenges.</li>
+<li>Internet (INTERNET): used for ads and for downloading books and audiobooks.</li>
+</ul>
+<h2>4. Children's privacy</h2>
+<p>The App is intended for users aged 13 and over, and its ad content rating is limited to Teen (T). It does not knowingly collect personal information from children under 13.</p>
+<h2>5. Data retention and deletion</h2>
+<p>All learning data is stored on your device only, so deleting the App deletes the related data with it.</p>
+<h2>6. Contact</h2>
+<p>Privacy inquiries: <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a></p>
+</div>
+
+<script>
+(function () {
+  var qs = new URLSearchParams(location.search).get('lang');
+  var saved = null;
+  try { saved = localStorage.getItem('policy-lang'); } catch (e) {}
+  var nav = (navigator.language || 'en').toLowerCase();
+  var initial = qs || saved || (nav.indexOf('ko') === 0 ? 'ko' : 'en');
+  function apply(l) {
+    var lang = (l === 'ko') ? 'ko' : 'en';
+    document.documentElement.lang = lang;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (el) {
+      el.hidden = el.getAttribute('data-lang') !== lang;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-set-lang]'), function (b) {
+      b.setAttribute('aria-current', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('policy-lang', lang); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest('[data-set-lang]') : null;
+    if (b) { e.preventDefault(); apply(b.getAttribute('data-set-lang')); }
+  });
+  apply(initial);
+})();
+</script>
 </body>
 </html>

@@ -9,9 +9,21 @@
          max-width: 720px; margin: 40px auto; padding: 0 20px; color: #222; line-height: 1.6; }
   h1 { font-size: 1.6em; } h2 { font-size: 1.15em; margin-top: 1.6em; }
   .muted { color: #777; font-size: .9em; }
+  .langbar { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 12px; }
+  .langbar button { font: inherit; font-size: .85em; padding: 5px 12px; border: 1px solid #cbd5e1;
+                    background: #fff; color: #475569; border-radius: 999px; cursor: pointer; }
+  .langbar button[aria-current="true"] { background: #2563eb; border-color: #2563eb; color: #fff; }
+  [data-lang][hidden] { display: none; }
 </style>
 </head>
 <body>
+
+<div class="langbar">
+  <button type="button" data-set-lang="ko">한국어</button>
+  <button type="button" data-set-lang="en">English</button>
+</div>
+
+<div data-lang="en">
 <h1>Privacy Policy</h1>
 <p class="muted">App: <strong>Learn Korean: Shadowing TOPIK</strong> (Shadowing Korean) · Developer: CIESoft · Last updated: 2026-08-04</p>
 
@@ -70,19 +82,88 @@ we will assist with removing any associated advertising identifier.</p>
 <h2>Contact</h2>
 <p>If you have any questions about this policy, contact us at
 <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a>.</p>
+</div>
 
-<hr>
-<h2>개인정보처리방침 요약 (한국어)</h2>
-<p class="muted">본 앱은 계정을 운영하지 않으며 자체 서버로 이용자 데이터를 전송하지 않습니다.
-학습 진도·XP·연속학습 기록은 기기 내부에만 저장되고 앱 삭제 시 함께 삭제됩니다.</p>
-<p class="muted"><strong>광고</strong>: Google AdMob 배너·전면 광고를 게재하며, 이를 위해 광고 ID(AAID),
-기기·앱 정보, IP 기반 대략적 위치, 광고 상호작용 기록이 Google에 의해 수집·처리됩니다. 기기 설정
-(설정 → Google → 광고)에서 광고 ID를 재설정하거나 삭제할 수 있습니다. EEA·영국·스위스 이용자에게는
-맞춤 광고 게재 전 Google 인증 동의 메시지(UMP)가 표시됩니다.</p>
-<p class="muted"><strong>마이크</strong>: 쉐도잉 녹음·재생 비교 기능에만 사용합니다. 녹음 파일은 앱 전용
-임시 저장소에 보관되며 <strong>외부로 전송·공유되지 않고</strong> 음성인식에도 사용되지 않습니다. 녹음
-버튼을 처음 누를 때만 권한을 요청하며, 권한 없이도 나머지 기능은 정상 동작합니다.</p>
-<p class="muted">본 앱의 이용 대상 연령은 만 13세 이상이며 광고 콘텐츠 등급은 Teen(T)으로 제한됩니다.
-문의: hscho7908@gmail.com</p>
+<div data-lang="ko">
+<h1>개인정보처리방침</h1>
+<p class="muted">앱: <strong>Learn Korean: Shadowing TOPIK</strong> (쉐도잉 코리안) · 개발자: CIESoft · 최종 업데이트: 2026-08-04</p>
+
+<h2>요약</h2>
+<p>학습 기록은 이용자의 기기에만 남습니다. 계정을 운영하지 않으며, 이용자 데이터를 수신하는
+서버도 운영하지 않습니다. 앱은 광고를 표시하며 이를 위해 Google AdMob 광고 SDK가 광고
+식별자를 수집합니다. 기기를 벗어나는 데이터는 이것이 유일하며, 아래에 전부 설명합니다.</p>
+
+<h2>광고</h2>
+<p>본 앱은 <strong>Google AdMob</strong>을 통해 배너 및 전면 광고를 표시합니다. 광고 게재를 위해
+AdMob SDK는 다음 정보를 수집·처리할 수 있습니다.</p>
+<ul>
+  <li>기기의 <strong>광고 ID</strong>(AAID) 및 관련 기기 식별자</li>
+  <li>대략적인 기기·앱 정보(기기 모델, OS 버전, 앱 버전, 언어)</li>
+  <li>IP 주소로 추정한 대략적 위치</li>
+  <li>광고 상호작용 기록(노출, 클릭)</li>
+</ul>
+<p>이 처리는 개발자가 아니라 Google이 수행하며,
+<a href="https://policies.google.com/technologies/partner-sites">Google 개인정보처리방침 및 약관</a>의
+적용을 받습니다. 기기 설정(설정 → Google → 광고)에서 언제든지 광고 ID를 재설정하거나 삭제할 수
+있습니다.</p>
+<p>유럽경제지역(EEA)·영국·스위스 이용자에게는 맞춤 광고 게재 전 Google 인증 동의 메시지(UMP)가
+표시되며, 이후에도 같은 메시지에서 선택을 변경할 수 있습니다.</p>
+
+<h2>마이크</h2>
+<p>본 앱은 대화를 쉐도잉한 자신의 음성을 녹음하고 다시 들어 비교할 수 있도록
+<strong>마이크</strong> 권한을 요청합니다. 녹음 파일은 기기 내 앱 전용 임시 저장소에 기록되며,
+<strong>업로드·전송·공유되지 않고</strong> 다시 녹음하거나 앱을 삭제하면 제거됩니다. 녹음에 대한
+음성 인식이나 서버 측 처리는 수행하지 않습니다. 권한은 처음 녹음 버튼을 누르는 시점에만
+요청하며, 권한이 없어도 나머지 기능은 정상 동작합니다.</p>
+
+<h2>기기에 저장되는 데이터</h2>
+<p>학습 진행 상황(완료한 에피소드, 플래시카드의 앎/모름 표시, XP, 연속 학습 기록, 인터페이스
+언어 등 앱 설정)은 로컬 앱 저장소를 이용해 <strong>기기에만</strong> 저장됩니다. 이 데이터는 기기를
+벗어나지 않으며 앱을 삭제하면 함께 삭제됩니다.</p>
+
+<h2>학습 콘텐츠와 네트워크 사용</h2>
+<p>모든 학습 콘텐츠(대화, 오디오, 어휘, 한글 학습)는 앱에 내장되어 있어 오프라인에서 이용할 수
+있습니다. 앱 자체는 학습 데이터를 어떤 서버로도 전송하지 않습니다. 앱이 발생시키는 유일한
+네트워크 통신은 위 <em>광고</em> 항목에서 설명한 광고 요청입니다.</p>
+
+<h2>아동의 개인정보</h2>
+<p>본 앱의 이용 대상 연령은 만 13세 이상입니다. 아동을 대상으로 하지 않으며 광고 콘텐츠 등급은
+Teen(T)으로 제한됩니다. 만 13세 미만 아동의 개인정보를 고의로 수집하지 않습니다. 아동이 앱을
+사용한 것으로 판단되는 경우 문의해 주시면 관련 광고 식별자 삭제를 도와드리겠습니다.</p>
+
+<h2>방침의 변경</h2>
+<p>데이터 처리 방식이 바뀌는 경우, 변경 사항이 배포되기 전에 본 페이지에서 방침을 갱신합니다.</p>
+
+<h2>문의</h2>
+<p>본 방침에 관한 문의는 <a href="mailto:hscho7908@gmail.com">hscho7908@gmail.com</a>으로
+연락해 주세요.</p>
+</div>
+
+<script>
+(function () {
+  var qs = new URLSearchParams(location.search).get('lang');
+  var saved = null;
+  try { saved = localStorage.getItem('policy-lang'); } catch (e) {}
+  var nav = (navigator.language || 'en').toLowerCase();
+  var initial = qs || saved || (nav.indexOf('ko') === 0 ? 'ko' : 'en');
+  function apply(l) {
+    var lang = (l === 'ko') ? 'ko' : 'en';
+    document.documentElement.lang = lang;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (el) {
+      el.hidden = el.getAttribute('data-lang') !== lang;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-set-lang]'), function (b) {
+      b.setAttribute('aria-current', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('policy-lang', lang); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest('[data-set-lang]') : null;
+    if (b) { e.preventDefault(); apply(b.getAttribute('data-set-lang')); }
+  });
+  apply(initial);
+})();
+</script>
+
 </body>
 </html>
